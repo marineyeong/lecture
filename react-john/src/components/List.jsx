@@ -18,11 +18,13 @@ const List = ({ title, completed, id, todoData, setTodoData }) => {
   };
 
   const handleClick = (id) => {
-    setTodoData(todoData.filter((data) => data.id !== id));
+    const newTodoData = todoData.filter((data) => data.id !== id);
+    setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
   };
 
   const handleCompleteChange = (id) => {
-    let newTodoData = todoData.map((data) => {
+    const newTodoData = todoData.map((data) => {
       if (data.id === id) {
         data.completed = !data.completed;
       }
@@ -30,6 +32,7 @@ const List = ({ title, completed, id, todoData, setTodoData }) => {
     });
 
     setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
   };
 
   const handleEditChange = (e) => {
@@ -47,6 +50,8 @@ const List = ({ title, completed, id, todoData, setTodoData }) => {
     });
 
     setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
+
     setIsEditing(false);
   };
 
